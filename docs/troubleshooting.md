@@ -16,6 +16,19 @@ Keep Livewire temporary uploads local:
 LIVEWIRE_TEMPORARY_FILE_UPLOAD_DISK=local
 ```
 
+## I uploaded an image, but it is not in Source Library
+
+Check whether you used:
+
+- `Design only`: stays attached to the current design only
+- `Add to Source Library`: stores and indexes the reusable original
+
+If the file was added outside the plugin, run:
+
+```bash
+php artisan creative-studio:index-sources --prune
+```
+
 ## Canvas export says the canvas is tainted
 
 Use the plugin's same-origin preview proxy and keep preview URLs on the configured plugin disk.

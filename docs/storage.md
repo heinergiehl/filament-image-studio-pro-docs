@@ -7,6 +7,9 @@ Image Studio Pro uses Laravel's filesystem abstraction, so it works with:
 - Google Cloud Storage
 - other compatible cloud disks
 
+The plugin has been exercised against real S3 and GCS buckets using Laravel
+disks, not just local fake storage.
+
 ## Simple setup
 
 If the whole app should use the same disk:
@@ -38,3 +41,13 @@ php artisan creative-studio:index-sources --prune
 ```
 
 This scans storage and stores searchable metadata in the app database so the Source Library does not need to browse a large bucket directly on every request.
+
+### What that command really does
+
+- storage keeps the actual files
+- your database keeps the searchable catalog
+- the command syncs storage into that catalog
+
+If users only add images through `Add to Source Library`, those items are
+indexed automatically. The command matters mainly for pre-existing files or
+files added outside the plugin.
