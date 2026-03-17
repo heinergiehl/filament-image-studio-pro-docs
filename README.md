@@ -89,6 +89,12 @@ The package ships with ready-to-use canvas presets for common marketing formats:
 - [Feature tour](docs/feature-tour.md)
 - [Integrations and storage](docs/integrations-and-storage.md)
 
+## Need help?
+
+If you have a cool idea for a feature, found a bug, or just want to share feedback, feel free to email me at webdevislife2021@gmail.com.
+
+I'm continuously improving Image Studio Pro and regularly publishing new versions based on real-world feedback.
+
 ## Requirements
 
 - PHP 8.3+
