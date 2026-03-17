@@ -91,9 +91,7 @@ The package ships with ready-to-use canvas presets for common marketing formats:
 
 ## Need help?
 
-If you have a cool idea for a feature, found a bug, or just want to share feedback, feel free to email me at webdevislife2021@gmail.com.
-
-I'm continuously improving Image Studio Pro and regularly publishing new versions based on real-world feedback.
+Questions, bugs, or feature ideas? Feel free to email me at webdevislife2021@gmail.com.
 
 ## Requirements
 
@@ -153,6 +151,6 @@ Start with [docs/getting-started.md](docs/getting-started.md), then move to [doc
 
 If you have a cool idea for a feature or an improvement, I'd genuinely love to hear it. Suggestions for workflows, integrations, UI polish, and quality-of-life improvements are always welcome.
 
-If you run into a bug, or just want to share an idea, feel free to email me at webdevislife2021@gmail.com.
+If you run into a bug, have a question, or just want to share an idea, feel free to email me at webdevislife2021@gmail.com.
 
-I'm continuously working to improve Image Studio Pro and will keep publishing new versions to make it better over time.
+I'm continuously improving Image Studio Pro and regularly publishing new versions to make it better over time.
