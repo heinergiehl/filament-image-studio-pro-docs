@@ -145,6 +145,8 @@ Start with [docs/getting-started.md](docs/getting-started.md), then move to [doc
 
 ## Feedback welcome
 
-If you have a cool idea for improving Image Studio Pro, I'd be very happy to hear it. Suggestions for workflows, integrations, UI polish, and quality-of-life improvements are always welcome.
+If you have a cool idea for a feature or an improvement, I'd genuinely love to hear it. Suggestions for workflows, integrations, UI polish, and quality-of-life improvements are always welcome.
 
-If you run into a bug, please send it my way as well. I'll keep working to continuously improve the plugin and publish new versions to make it better over time.
+If you run into a bug, or just want to share an idea, feel free to email me at webdevislife2021@gmail.com.
+
+I'm continuously working to improve Image Studio Pro and will keep publishing new versions to make it better over time.
