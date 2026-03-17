@@ -1,26 +1,99 @@
-# Image Studio Pro
+# Filament Image Studio Pro
 
-Image Studio Pro adds a full image-production workflow to Filament:
+Filament Image Studio Pro is a premium Filament plugin for teams that need to create branded, publish-ready images without leaving the admin panel.
 
-- edit image-based designs inside your panel
+It is built for real production work inside Filament: reusable source images, editable projects, templates, brand presets, exports, and direct handoff back into your app.
+
+## Live demo
+
+- Landing page: https://filament-image-studio-pro.heinerdevelops.tech
+- Admin login: https://filament-image-studio-pro.heinerdevelops.tech/admin/login
+
+Use the landing page when you want the public product overview. Use the admin login when you want to go straight into the Filament dashboard demo.
+
+If you open a protected studio route while logged out, Filament redirects you to the admin login screen first.
+
+## What Image Studio Pro does
+
+Image Studio Pro adds a complete image workflow to Filament:
+
+- create image drafts from uploads, presets, templates, or reusable sources
+- edit images on a canvas with text, shapes, annotations, filters, cropping, and layers
+- save reusable templates for repeatable output
+- create brand presets with colors, fonts, text defaults, and logos
 - manage reusable source images in a Source Library
-- save reusable layouts for repeatable output
-- export rendered output back into your app storage or Media Library
+- export renders as PNG, JPEG, or WebP
+- send the finished result back into a Filament form, record attribute, storage path, or Media Library
 
-Use Image Studio Pro when your team needs repeatable image production inside Filament instead of a separate external design tool.
+## Feature summary
 
-## Typical workflow
+### Editor
 
-1. choose a source image or start blank
-2. apply a reusable layout if needed
-3. edit text, shapes, markup, and placement
-4. save the design or export a finished render
+- start from a blank canvas, an uploaded image, a template, a saved project, or a preset size
+- crop and reposition images directly on the canvas
+- add text layers, callouts, logos, and shape overlays
+- annotate screenshots or marketing images with quick markup tools
+- apply image adjustments such as brightness, contrast, saturation, blur, and grayscale
+- reorder layers, replace sources, and keep working from saved drafts
+- use undo / redo, snap guides, autosave, and draft previews while editing
+
+### Library
+
+- browse saved projects, reusable source images, templates, renders, and brand presets from one place
+- search and paginate large libraries
+- track project state with draft, published, and archived statuses
+- keep reusable source images separate from working design drafts
+
+### Templates and brand presets
+
+- save reusable templates from the editor
+- reopen templates from the editor or the library page
+- create brand presets with colors, fonts, alignment defaults, logo assets, and text styling
+- apply brand presets to new layers or restyle existing text quickly
+
+### Filament integration
+
+- standalone `Image Studio` page for editing
+- standalone `Image Studio Assets` page for managing projects and reusable assets
+- Filament form field integration for opening the studio from forms
+- Filament action integration for editing existing records in the studio
+- output targets for asset references, plain storage paths, and Spatie Media Library
+
+### Storage and source support
+
+- Laravel filesystem support for local disks, S3, GCS, R2, MinIO, and compatible storage
+- curated filesystem browsing for smaller libraries
+- indexed source browsing for larger cloud-backed libraries
+- optional Spatie Media Library source browsing and output support
+- signed preview URLs and same-origin preview proxy support for private cloud storage
+
+### Multitenancy and access control
+
+- automatic tenant scoping when Filament tenancy is active
+- configurable access hooks for page access, asset access, and source access
+
+## Built-in presets
+
+The package ships with ready-to-use canvas presets for common marketing formats:
+
+- Instagram Square
+- Instagram Story
+- Open Graph
+- Blog Hero
+- Promo Banner
+- YouTube Thumbnail
+
+## Documentation
+
+- [Getting started](docs/getting-started.md)
+- [Feature tour](docs/feature-tour.md)
+- [Integrations and storage](docs/integrations-and-storage.md)
 
 ## Requirements
 
 - PHP 8.3+
-- Laravel 12
-- Filament 5
+- Laravel 12.x
+- Filament 5.x
 - Livewire 4
 
 ## Installation
@@ -32,7 +105,7 @@ php artisan migrate
 php artisan filament:assets
 ```
 
-### Register the plugin
+Register the plugin in your Filament panel:
 
 ```php
 use Filament\Panel;
@@ -47,65 +120,25 @@ public function panel(Panel $panel): Panel
 }
 ```
 
-## Storage setup
+## Quick first workflow
 
-Image Studio Pro uses Laravel's filesystem abstraction, so it works with local storage, Amazon S3, Google Cloud Storage, or other compatible cloud disks.
+1. Install the plugin and register it in your Filament panel.
+2. Open `Image Studio Assets` to upload reusable sources, create brand presets, and review templates.
+3. Open `Image Studio` to start a blank design, open a saved project, load a template, or begin from a source image.
+4. Save the draft, export one or more render variants, or send the result back into your app.
 
-Most installs should use one of these two simple models.
+## When to use it
 
-If the whole app should use the same disk:
+Image Studio Pro is a strong fit when your team regularly creates:
 
-```dotenv
-FILESYSTEM_DISK=public
-```
+- social media graphics
+- blog hero images
+- Open Graph cards
+- promo banners
+- YouTube thumbnails
+- internal review and annotation images
+- reusable branded image templates for editors or admin staff
 
-If only Image Studio Pro should use a cloud disk (e.g., S3):
+## Need deeper setup details?
 
-```dotenv
-FILAMENT_CREATIVE_STUDIO_DISK=s3
-LIVEWIRE_TEMPORARY_FILE_UPLOAD_DISK=local
-```
-
-> **Note:** For cloud-backed apps, keep Livewire temporary uploads local (`LIVEWIRE_TEMPORARY_FILE_UPLOAD_DISK=local`) unless you have explicitly configured direct browser-to-bucket uploads. The plugin can still store final source images, previews, and exports on S3 or GCS.
-
-### Indexed Source Browsing
-Images uploaded through `Add to Source Library` are indexed automatically. For larger, pre-existing cloud libraries or files added outside the plugin, build the Source Library index via command:
-
-```bash
-php artisan creative-studio:index-sources --prune
-```
-
-## Core concepts
-
-- **Designs**: saved working documents
-- **Source Library**: reusable original images
-- **Layouts**: reusable text and overlay structure
-- **Exports**: rendered output files
-
-### Design Only vs. Source Library
-- `Design only` upload: use the image in the current design only.
-- `Add to Source Library`: keep the original reusable for future designs.
-
-## Modules
-
-### Editor
-The editor keeps source changes in one place. Use the media rail to upload or browse the Source Library, or the `Designs` sidebar to change the current source or reopen recent work. 
-- **Snaplines**: Hold `Ctrl` / `Cmd` while dragging to lock the selected layer onto nearby guides.
-- **Undo / redo**: Available directly on the stage header.
-- **Exports**: Exports stay full-size even when the editor canvas is shown at a reduced preview scale.
-
-### Source Library
-Source Library is the reusable image catalog. It is separate from saved designs on purpose.
-- `Designs` are editable working documents
-- `Source Library` items are reusable originals
-
-### Layouts
-Layouts define structure (e.g., headline position, CTA position, logo placement) for repeatable output. Source images define content. Style presets are optional visual helpers.
-
-## Troubleshooting
-
-- **Upload works, but Source Library feels slow on cloud storage:** Run `php artisan creative-studio:index-sources --prune` to use the indexed provider.
-- **Browser upload fails on S3:** Keep Livewire temporary uploads local via `.env`.
-- **Uploaded image is not in Source Library:** Ensure you used `Add to Source Library` instead of `Design only`. If added externally, run the index-sources command.
-- **Canvas export says the canvas is tainted:** Use the plugin's same-origin preview proxy and keep preview URLs on the configured plugin disk.
-- **Search finds nothing:** Check that the correct Source Library provider is active, files exist in the configured library directory, and the index has been built.
+Start with [docs/getting-started.md](docs/getting-started.md), then move to [docs/integrations-and-storage.md](docs/integrations-and-storage.md) if you need custom source providers, cloud storage, or app output configuration.
