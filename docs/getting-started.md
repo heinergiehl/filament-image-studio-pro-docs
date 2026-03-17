@@ -161,3 +161,11 @@ Start simple:
 
 - Read [feature-tour.md](feature-tour.md) for a full feature breakdown.
 - Read [integrations-and-storage.md](integrations-and-storage.md) for sources, outputs, storage, tenancy, and production advice.
+
+## Need help or want to share feedback?
+
+If you have a cool idea for a feature or an improvement, I'd genuinely love to hear it. Suggestions for workflows, integrations, UI polish, and quality-of-life improvements are always welcome.
+
+If you run into a bug, have a question, or just want to share an idea, feel free to email me at webdevislife2021@gmail.com.
+
+I'm continuously improving Image Studio Pro and regularly publishing new versions to make it better over time.
