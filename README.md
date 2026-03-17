@@ -142,3 +142,9 @@ Image Studio Pro is a strong fit when your team regularly creates:
 ## Need deeper setup details?
 
 Start with [docs/getting-started.md](docs/getting-started.md), then move to [docs/integrations-and-storage.md](docs/integrations-and-storage.md) if you need custom source providers, cloud storage, or app output configuration.
+
+## Feedback welcome
+
+If you have a cool idea for improving Image Studio Pro, I'd be very happy to hear it. Suggestions for workflows, integrations, UI polish, and quality-of-life improvements are always welcome.
+
+If you run into a bug, please send it my way as well. I'll keep working to continuously improve the plugin and publish new versions to make it better over time.
