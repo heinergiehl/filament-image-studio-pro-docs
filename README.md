@@ -13,6 +13,22 @@ Use the landing page when you want the public product overview. Use the admin lo
 
 If you open a protected studio route while logged out, Filament redirects you to the admin login screen first.
 
+## Purchase, docs, and support
+
+- Product page and public docs: https://filament-image-studio-pro.heinerdevelops.tech
+- Public GitHub docs and release notes: https://github.com/heinergiehl/filament-image-studio-pro-docs
+- Support: webdevislife2021@gmail.com
+
+## Screenshots
+
+Editor workspace:
+
+![Image Studio editor workspace](docs/screenshots/editor-page.png)
+
+Library workspace:
+
+![Image Studio library workspace](docs/screenshots/library-page.png)
+
 ## What Image Studio Pro does
 
 Image Studio Pro adds a complete image workflow to Filament:
@@ -89,10 +105,6 @@ The package ships with ready-to-use canvas presets for common marketing formats:
 - [Feature tour](docs/feature-tour.md)
 - [Integrations and storage](docs/integrations-and-storage.md)
 
-## Need help?
-
-Questions, bugs, or feature ideas? Feel free to email me at webdevislife2021@gmail.com.
-
 ## Requirements
 
 - PHP 8.3+
@@ -101,6 +113,10 @@ Questions, bugs, or feature ideas? Feel free to email me at webdevislife2021@gma
 - Livewire 4
 
 ## Installation
+
+1. Purchase Image Studio Pro from the public product page.
+2. Use the Composer repository or authentication details from your purchase instructions.
+3. Install the package:
 
 ```bash
 composer require heiner/filament-image-studio-pro
@@ -113,16 +129,25 @@ Register the plugin in your Filament panel:
 
 ```php
 use Filament\Panel;
-use Heiner\FilamentCreativeStudioPro\CreativeStudioPlugin;
+use Heiner\FilamentImageStudioPro\ImageStudioPlugin;
 
 public function panel(Panel $panel): Panel
 {
     return $panel
         ->plugins([
-            CreativeStudioPlugin::make(),
+            ImageStudioPlugin::make(),
         ]);
 }
 ```
+
+## CSS hooks
+
+The public styling hooks are rooted at:
+
+- `.fi-creative-studio`
+- `.fi-creative-studio-field`
+
+That keeps host-app overrides aligned with Filament's `fi-` hook convention instead of relying on internal markup.
 
 ## Quick first workflow
 

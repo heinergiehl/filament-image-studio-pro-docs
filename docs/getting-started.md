@@ -11,6 +11,12 @@ If you want to see the product before installing it, use the live demo:
 
 The landing page is the public overview. The admin login takes you straight to the Filament dashboard demo.
 
+## Purchase and support
+
+- Product page and public docs: https://filament-image-studio-pro.heinerdevelops.tech
+- Public GitHub docs and release notes: https://github.com/heinergiehl/filament-image-studio-pro-docs
+- Support: webdevislife2021@gmail.com
+
 ## Requirements
 
 - PHP 8.3+
@@ -19,6 +25,10 @@ The landing page is the public overview. The admin login takes you straight to t
 - Livewire 4
 
 ## Install the package
+
+1. Purchase Image Studio Pro.
+2. Apply the Composer repository or authentication details from your purchase instructions.
+3. Install the package:
 
 ```bash
 composer require heiner/filament-image-studio-pro
@@ -33,13 +43,13 @@ Add the plugin to your Filament panel provider:
 
 ```php
 use Filament\Panel;
-use Heiner\FilamentCreativeStudioPro\CreativeStudioPlugin;
+use Heiner\FilamentImageStudioPro\ImageStudioPlugin;
 
 public function panel(Panel $panel): Panel
 {
     return $panel
         ->plugins([
-            CreativeStudioPlugin::make(),
+            ImageStudioPlugin::make(),
         ]);
 }
 ```
@@ -48,10 +58,19 @@ public function panel(Panel $panel): Panel
 
 After registration, the plugin adds two main pages:
 
-- `Image Studio` — the editor page where users build and export designs
-- `Image Studio Assets` — the library page for projects, reusable sources, templates, renders, and brand presets
+- `Image Studio` - the editor page where users build and export designs
+- `Image Studio Assets` - the library page for projects, reusable sources, templates, renders, and brand presets
 
 By default both pages are registered in your panel navigation.
+
+## CSS hooks
+
+Public wrapper hooks use Filament's `fi-` prefix:
+
+- `.fi-creative-studio`
+- `.fi-creative-studio-field`
+
+Use those wrappers for host-app overrides instead of targeting internal panel markup.
 
 ## Your first working setup
 

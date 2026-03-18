@@ -2,6 +2,12 @@
 
 This guide covers how Filament Image Studio Pro connects to your app, where it stores data, and how to keep source browsing fast and predictable.
 
+## Public access
+
+- Product page and docs: https://filament-image-studio-pro.heinerdevelops.tech
+- Public GitHub docs and release notes: https://github.com/heinergiehl/filament-image-studio-pro-docs
+- Support: webdevislife2021@gmail.com
+
 ## Core integration points
 
 Image Studio Pro integrates with Filament in three main ways:
@@ -55,6 +61,15 @@ For Media Library-backed records:
 EditInImageStudioAction::make()
     ->attachRenderToMediaLibrary('hero-images');
 ```
+
+## CSS hooks
+
+Public wrapper hooks use Filament's `fi-` convention:
+
+- `.fi-creative-studio`
+- `.fi-creative-studio-field`
+
+That makes host-app overrides predictable and keeps plugin styling aligned with the rest of the Filament ecosystem.
 
 ## Output targets
 
