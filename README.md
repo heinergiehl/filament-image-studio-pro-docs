@@ -23,11 +23,11 @@ If you open a protected studio route while logged out, Filament redirects you to
 
 Editor workspace:
 
-![Image Studio editor workspace](docs/screenshots/editor-page.png)
+![Image Studio editor workspace](docs/screenshots/editor-page.png?v=20260319-0045)
 
 Library workspace:
 
-![Image Studio library workspace](docs/screenshots/library-page.png)
+![Image Studio library workspace](docs/screenshots/library-page.png?v=20260319-0045)
 
 ## What Image Studio Pro does
 
