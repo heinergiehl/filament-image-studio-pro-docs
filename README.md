@@ -101,9 +101,9 @@ The package ships with ready-to-use canvas presets for common marketing formats:
 
 ## Documentation
 
-- [Getting started](docs/getting-started.md)
-- [Feature tour](docs/feature-tour.md)
-- [Integrations and storage](docs/integrations-and-storage.md)
+- [Getting started](https://github.com/heinergiehl/filament-image-studio-pro-docs/blob/main/docs/getting-started.md)
+- [Feature tour](https://github.com/heinergiehl/filament-image-studio-pro-docs/blob/main/docs/feature-tour.md)
+- [Integrations and storage](https://github.com/heinergiehl/filament-image-studio-pro-docs/blob/main/docs/integrations-and-storage.md)
 
 ## Requirements
 
@@ -170,7 +170,7 @@ Image Studio Pro is a strong fit when your team regularly creates:
 
 ## Need deeper setup details?
 
-Start with [docs/getting-started.md](docs/getting-started.md), then move to [docs/integrations-and-storage.md](docs/integrations-and-storage.md) if you need custom source providers, cloud storage, or app output configuration.
+Start with [Getting started](https://github.com/heinergiehl/filament-image-studio-pro-docs/blob/main/docs/getting-started.md), then move to [Integrations and storage](https://github.com/heinergiehl/filament-image-studio-pro-docs/blob/main/docs/integrations-and-storage.md) if you need custom source providers, cloud storage, or app output configuration.
 
 ## Feedback welcome
 
