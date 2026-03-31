@@ -111,7 +111,9 @@ The package ships with ready-to-use canvas presets for common marketing formats:
 - [Feature tour](https://github.com/heinergiehl/filament-image-studio-pro-docs/blob/main/docs/feature-tour.md)
 - [Integrations and storage](https://github.com/heinergiehl/filament-image-studio-pro-docs/blob/main/docs/integrations-and-storage.md)
 
-## Requirements
+## Current requirements
+
+The current release targets the following runtime stack:
 
 - PHP 8.3+
 - Laravel 12.x

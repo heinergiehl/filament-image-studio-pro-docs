@@ -17,7 +17,9 @@ The landing page is the public overview. The admin login takes you straight to t
 - Public GitHub docs and release notes: https://github.com/heinergiehl/filament-image-studio-pro-docs
 - Support: webdevislife2021@gmail.com
 
-## Requirements
+## Current requirements
+
+The current release targets the following runtime stack:
 
 - PHP 8.3+
 - Laravel 12.x
