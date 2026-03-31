@@ -55,10 +55,15 @@ The editor supports day-to-day image production work inside Filament:
 
 - text layers for headlines, labels, and callouts
 - shape layers for overlays and emphasis
-- annotation tools for review and feedback images
+- markup tools (lines, arrows, highlights, notes, redaction) for review and feedback images
 - image cropping and repositioning
 - source replacement inside an existing design
 - layer-based editing and reordering
+- freehand drawing with pencil, circle, and spray brush types
+- right-click context menu with cut, copy, paste, duplicate, delete, lock, and z-order controls
+- 30+ keyboard shortcuts covering undo/redo, clipboard, selection, nudge, zoom, and z-order
+- scroll-wheel zoom, pinch zoom, zoom fit/in/out buttons, and spacebar-drag panning
+- per-object locking to prevent accidental edits on finalized layers
 
 ### Styling and text controls
 
@@ -79,6 +84,13 @@ The editor includes filter and adjustment support for common image work, includi
 - saturation
 - grayscale
 - blur
+- hue rotation
+- vibrance
+- noise
+- pixelate
+- sharpen
+- sepia
+- invert
 
 ### Workflow helpers
 

@@ -34,7 +34,7 @@ Library workspace:
 Image Studio Pro adds a complete image workflow to Filament:
 
 - create image drafts from uploads, presets, templates, or reusable sources
-- edit images on a canvas with text, shapes, annotations, filters, cropping, and layers
+- edit images on a canvas with text, shapes, markup tools, drawing, filters, clipboard, keyboard shortcuts, and layers
 - save reusable templates for repeatable output
 - create brand presets with colors, fonts, text defaults, and logos
 - manage reusable source images in a Source Library
@@ -48,10 +48,16 @@ Image Studio Pro adds a complete image workflow to Filament:
 - start from a blank canvas, an uploaded image, a template, a saved project, or a preset size
 - crop and reposition images directly on the canvas
 - add text layers, callouts, logos, and shape overlays
-- annotate screenshots or marketing images with quick markup tools
+- use markup tools (lines, arrows, highlights, notes, redaction) for review and feedback images
 - apply image adjustments such as brightness, contrast, saturation, blur, and grayscale
 - reorder layers, replace sources, and keep working from saved drafts
 - use undo / redo, snap guides, autosave, and draft previews while editing
+- draw freehand with pencil, circle, and spray brush types
+- right-click context menu with clipboard, lock, and z-order controls
+- 30+ keyboard shortcuts for common editing operations
+- zoom and pan the canvas with scroll wheel, pinch, buttons, and spacebar drag
+- lock individual layers to prevent accidental edits
+- apply 12 image filters including hue rotation, vibrance, noise, pixelate, sharpen, sepia, and invert
 
 ### Library
 
@@ -165,7 +171,7 @@ Image Studio Pro is a strong fit when your team regularly creates:
 - Open Graph cards
 - promo banners
 - YouTube thumbnails
-- internal review and annotation images
+- internal review and markup images
 - reusable branded image templates for editors or admin staff
 
 ## Need deeper setup details?
