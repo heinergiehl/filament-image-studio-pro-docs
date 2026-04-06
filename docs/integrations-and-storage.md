@@ -227,15 +227,73 @@ That includes:
 
 Single-tenant apps do not need extra setup.
 
+### Workspace modes for non-tenant apps
+
+Apps without Filament tenancy can choose between two scoping modes:
+
+- **User mode** (default): each signed-in admin sees only their own drafts, templates, and brand presets. This matches the original behavior.
+- **Panel mode**: all admins in the same Filament panel share one workspace. Enable it for team collaboration without tenancy.
+
+```dotenv
+FILAMENT_CREATIVE_STUDIO_NON_TENANT_SCOPE=panel
+```
+
+Existing records from older versions remain visible after upgrading to panel mode.
+
 ## Authorization
 
-You can hook into authorization with config-driven abilities for:
+Image Studio Pro supports four config-driven authorization abilities. All are optional and permissive by default — when an ability is not configured, all authenticated panel users have access.
 
-- page access
-- asset access
-- source access
+```php
+// config/filament-image-studio-pro.php
+'authorization' => [
+    'page_ability' => null,          // Gate for accessing the studio pages
+    'asset_ability' => null,         // Gate for creating, editing, and exporting assets
+    'source_ability' => null,        // Gate for browsing source images
+    'review_ability' => null,        // Gate for approving or requesting changes
+],
+```
 
-This makes it easier to line the studio up with existing roles and policies in your admin panel.
+### Page access
+
+Set `page_ability` to control who can see the Image Studio and Image Studio Assets pages in the panel navigation.
+
+### Asset access
+
+Set `asset_ability` to control who can create new designs, edit existing ones, and export renders. The Gate receives the asset model (or the class for creation).
+
+### Source access
+
+Set `source_ability` to control who can browse and load source images. The Gate receives the disk name and path as parameters.
+
+### Review access
+
+Set `review_ability` to control who can approve assets or request changes. The Gate receives the asset model. Users without this ability can still submit their own work for review — they just cannot approve or reject.
+
+Example setup with Laravel Gates:
+
+```php
+// In a service provider
+Gate::define('review-image-studio', function ($user) {
+    return $user->hasRole('reviewer') || $user->hasRole('admin');
+});
+
+Gate::define('manage-image-studio', function ($user, $asset = null) {
+    return $user->hasRole('editor') || $user->hasRole('admin');
+});
+```
+
+```php
+// config/filament-image-studio-pro.php
+'authorization' => [
+    'asset_ability' => 'manage-image-studio',
+    'review_ability' => 'review-image-studio',
+],
+```
+
+### Preview file security
+
+Preview files are served through a signed route that validates an HMAC signature. The controller additionally enforces a disk allowlist derived from the plugin’s configured disks, so preview requests cannot access arbitrary storage locations.
 
 ## Custom providers and outputs
 

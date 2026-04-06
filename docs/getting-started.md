@@ -178,6 +178,57 @@ Start simple:
 3. Upload a curated source library instead of pointing at a huge bucket root.
 4. Add indexed browsing later if your shared library becomes large.
 
+## Workspace modes
+
+Image Studio supports three collaboration modes out of the box:
+
+- **Tenant-aware**: when Filament tenancy is active, records scope to the active tenant automatically. No extra setup needed.
+- **User mode** (default): each signed-in admin sees only their own drafts. This matches the pre-1.2 behavior.
+- **Panel mode** (opt-in): admins in the same Filament panel share one studio workspace.
+
+Switch to panel mode for shared team collaboration without Filament tenancy:
+
+```dotenv
+FILAMENT_CREATIVE_STUDIO_NON_TENANT_SCOPE=panel
+```
+
+## Setting up reviews and approvals
+
+The approval workflow is available out of the box after running the latest migrations.
+
+Projects can move through: `draft → in_review → changes_requested → approved`.
+
+To restrict who can approve or request changes, define a Gate and set the config:
+
+```php
+// AppServiceProvider or AuthServiceProvider
+Gate::define('review-image-studio', function ($user) {
+    return $user->hasRole('reviewer'); // your own logic
+});
+```
+
+```php
+// config/filament-image-studio-pro.php
+'authorization' => [
+    'review_ability' => 'review-image-studio',
+],
+```
+
+When no ability is configured, all authenticated panel users can review. Configure the ability when you need role separation between creators and reviewers.
+
+## Setting up the picker field
+
+You can let users select from existing Image Studio assets in any Filament form:
+
+```php
+use Heiner\FilamentCreativeStudioPro\Fields\CreativeStudioPicker;
+
+CreativeStudioPicker::make('selected_image')
+    ->label('Choose an existing design');
+```
+
+The picker shows approved and draft assets with search and pagination.
+
 ## Next steps
 
 - Read [feature-tour.md](feature-tour.md) for a full feature breakdown.

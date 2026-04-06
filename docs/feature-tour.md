@@ -103,6 +103,67 @@ The editor is designed for real repeated usage, not one-off demos:
 - recent project access
 - recent source access
 
+## Team workflows
+
+Image Studio Pro includes a full team review and approval workflow for collaborative production.
+
+### Approval workflow
+
+Assets move through a clear review cycle separate from the draft/published/archived status:
+
+- **Draft** — work in progress, not yet submitted
+- **In Review** — submitted for review by a team member
+- **Changes Requested** — reviewer asked for modifications with a required note
+- **Approved** — reviewer approved the asset for use
+
+Workflow controls appear in both the editor and the library page. Submitters and reviewers are tracked with timestamps.
+
+When a document changes after approval, the workflow status resets back to draft automatically so stale approvals cannot persist.
+
+### Revision history
+
+Saved projects support immutable revision history:
+
+- manual revision checkpoints from the editor
+- automatic checkpoint creation when submitting for review
+- restore any previous revision — restoring creates a new entry instead of overwriting history
+- full revision list accessible from the library and editor sidebar
+
+Revisions are append-only. You always have a reliable trail of prior states.
+
+### Shared workspaces
+
+Image Studio Pro supports three collaboration modes:
+
+- **Tenant-aware** — when Filament tenancy is active, records scope to the active tenant automatically
+- **User mode** (default) — each signed-in admin sees only their own drafts, templates, and brand presets
+- **Panel mode** (opt-in) — admins in the same Filament panel share one studio workspace
+
+Use panel mode when multiple admins need to collaborate on the same set of designs without Filament tenancy.
+
+### Picker field
+
+You can embed an Image Studio picker in any Filament form to let users select from existing assets and renders:
+
+```php
+use Heiner\FilamentCreativeStudioPro\Fields\CreativeStudioPicker;
+
+CreativeStudioPicker::make('selected_image')
+    ->label('Choose an image');
+```
+
+The picker can also be opened from rich-text editors to insert images directly into content.
+
+### Review authorization
+
+Review actions can optionally be gated behind a policy or Gate ability so only designated reviewers can approve or request changes.
+
+```php
+'authorization' => [
+    'review_ability' => 'review-image-studio',
+]
+```
+
 ### Templates
 
 Templates make repeatable production much faster.
@@ -255,8 +316,20 @@ This includes:
 Access can also be controlled with config-driven abilities for:
 
 - page access
-- asset access
+- asset access (including creation and export)
 - source access
+- review access (approve and request changes)
+
+All abilities are optional and permissive by default. Configure them when you need role-based access control:
+
+```php
+'authorization' => [
+    'page_ability' => 'access-image-studio',
+    'asset_ability' => 'manage-image-studio',
+    'source_ability' => 'browse-image-studio-sources',
+    'review_ability' => 'review-image-studio',
+]
+```
 
 ## Best fit
 
