@@ -19,9 +19,7 @@ The landing page is the public overview. The admin login takes you straight to t
 
 ## Current requirements
 
-The current release targets the following runtime stack:
-
-- PHP 8.3+
+- PHP 8.2+
 - Laravel 12.x
 - Filament 5.x
 - Livewire 4
@@ -45,13 +43,13 @@ Add the plugin to your Filament panel provider:
 
 ```php
 use Filament\Panel;
-use Heiner\FilamentImageStudioPro\ImageStudioPlugin;
+use Heiner\FilamentCreativeStudioPro\CreativeStudioPlugin;
 
 public function panel(Panel $panel): Panel
 {
     return $panel
         ->plugins([
-            ImageStudioPlugin::make(),
+            CreativeStudioPlugin::make(),
         ]);
 }
 ```
@@ -229,12 +227,87 @@ CreativeStudioPicker::make('selected_image')
 
 The picker shows approved and draft assets with search and pagination.
 
+## Using viewer actions
+
+Three lightweight actions let you view and browse images without opening the editor.
+
+### ViewImageAction
+
+Opens a single image in a pan/zoom slide-over. Use it on table rows, resource pages, or anywhere you need quick image inspection.
+
+```php
+use Heiner\FilamentCreativeStudioPro\Actions\ViewImageAction;
+
+ViewImageAction::make()
+    ->imageUrl(fn ($record) => $record->cover_url)
+    ->imageAlt(fn ($record) => $record->title);
+```
+
+### OpenMediaAction
+
+Opens a gallery modal for browsing a set of images. Users can pan/zoom individual items and optionally select one or more.
+
+```php
+use Heiner\FilamentCreativeStudioPro\Actions\OpenMediaAction;
+
+OpenMediaAction::make()
+    ->media([
+        ['src' => 'https://example.com/photo1.jpg', 'alt' => 'Photo 1'],
+        ['src' => 'https://example.com/photo2.jpg', 'alt' => 'Photo 2'],
+    ])
+    ->multiple()
+    ->onSelect(function (array $selected): void {
+        // $selected is a list of chosen media items
+    });
+```
+
+## Using viewer Livewire components
+
+Three Livewire components ship with the package for embedding viewers directly in Blade views or Filament pages.
+
+### PanZoomViewer
+
+```blade
+<livewire:filament-image-studio-pro::pan-zoom-viewer
+    src="https://example.com/image.jpg"
+    alt="Product photo"
+/>
+```
+
+Supports optional `zoom`, `min-zoom`, and `max-zoom` props. Zoom controls and a reset button are included.
+
+### GalleryViewer
+
+```blade
+<livewire:filament-image-studio-pro::gallery-viewer
+    :media="[
+        ['src' => '/photos/1.jpg', 'thumb' => '/photos/1-thumb.jpg', 'alt' => 'First', 'caption' => null],
+        ['src' => '/photos/2.jpg', 'thumb' => '/photos/2-thumb.jpg', 'alt' => 'Second', 'caption' => 'A caption'],
+    ]"
+    :columns="3"
+/>
+```
+
+Lightbox mode is enabled by default. Keyboard navigation (arrow keys, Escape) works in the lightbox.
+
+### ImageCompare
+
+```blade
+<livewire:filament-image-studio-pro::image-compare
+    before="https://example.com/before.jpg"
+    after="https://example.com/after.jpg"
+    before-label="Original"
+    after-label="Edited"
+    :initial-position="40"
+/>
+```
+
+The divider is draggable. `initial-position` sets the starting split as a percentage (0–100).
+
 ## Next steps
 
 - Read [feature-tour.md](feature-tour.md) for a full feature breakdown.
 - Read [integrations-and-storage.md](integrations-and-storage.md) for sources, outputs, storage, tenancy, and production advice.
-
-## Need help or want to share feedback?
 
 If you have a cool idea for a feature or an improvement, I'd genuinely love to hear it. Suggestions for workflows, integrations, UI polish, and quality-of-life improvements are always welcome.
 

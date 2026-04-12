@@ -62,6 +62,26 @@ EditInImageStudioAction::make()
     ->attachRenderToMediaLibrary('hero-images');
 ```
 
+## Viewer action integration
+
+Use viewer actions when you need to inspect or browse images without opening the editor.
+
+```php
+use Heiner\FilamentCreativeStudioPro\Actions\ViewImageAction;
+use Heiner\FilamentCreativeStudioPro\Actions\OpenMediaAction;
+
+// Quick single-image pan/zoom slide-over
+ViewImageAction::make()
+    ->imageUrl(fn ($record) => $record->cover_url)
+    ->imageAlt(fn ($record) => $record->title);
+
+// Gallery modal with optional selection
+OpenMediaAction::make()
+    ->media(fn ($record) => $record->getMediaItems())
+    ->multiple()
+    ->onSelect(fn (array $selected) => $this->handleSelection($selected));
+```
+
 ## CSS hooks
 
 Public wrapper hooks use Filament's `fi-` convention:

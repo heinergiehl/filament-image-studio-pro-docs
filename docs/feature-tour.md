@@ -63,6 +63,7 @@ The editor supports day-to-day image production work inside Filament:
 - right-click context menu with cut, copy, paste, duplicate, delete, lock, and z-order controls
 - 30+ keyboard shortcuts covering undo/redo, clipboard, selection, nudge, zoom, and z-order
 - scroll-wheel zoom, pinch zoom, zoom fit/in/out buttons, and spacebar-drag panning
+- draggable zoom toolbar — drag it anywhere within the canvas card so it never covers your work
 - per-object locking to prevent accidental edits on finalized layers
 
 ### Styling and text controls
@@ -194,7 +195,85 @@ Brand presets can be used to:
 - add branded headline and callout layers
 - restyle layers without rebuilding the project structure
 
-## Library features
+## Image viewer and gallery
+
+Three standalone viewer components ship with the package for situations where you need to inspect, browse, or compare images without opening the canvas editor.
+
+### ViewImageAction
+
+A Filament action that opens a single image in a pan/zoom slide-over. Use it as a table action, header action, or infolist action on any resource that stores image URLs.
+
+```php
+ViewImageAction::make()
+    ->imageUrl(fn ($record) => $record->cover_url)
+    ->imageAlt(fn ($record) => $record->title);
+```
+
+The slide-over includes zoom in/out, fit-to-screen, and a reset button. The action renders a close button; the submit action is hidden.
+
+### OpenMediaAction
+
+A Filament action that opens a gallery modal with pan/zoom, optional selection, and optional multiple-select mode. Use it when you want to let users browse and pick images from a known set.
+
+```php
+OpenMediaAction::make()
+    ->media(fn () => $this->getMediaItems())
+    ->multiple()
+    ->columns(3)
+    ->onSelect(function (array $selected): void {
+        // Each item: ['src' => '...', 'thumb' => '...', 'alt' => '...', 'caption' => null]
+    });
+```
+
+Media items passed to `.media()` are validated on submission — only items that were in the original set can be selected.
+
+### PanZoomViewer
+
+A Livewire component for embedding a standalone pan/zoom image viewer anywhere in Filament Blade views.
+
+```blade
+<livewire:filament-image-studio-pro::pan-zoom-viewer
+    src="{{ $imageUrl }}"
+    alt="{{ $alt }}"
+    :initial-zoom="1.0"
+    :min-zoom="0.15"
+    :max-zoom="5.0"
+/>
+```
+
+Default zoom bounds are configurable globally in `config/filament-image-studio-pro.php` under `viewer.initial_zoom`, `viewer.min_zoom`, and `viewer.max_zoom`.
+
+### GalleryViewer
+
+A Livewire gallery component with a responsive grid, lightbox, keyboard navigation, and optional selection mode.
+
+```blade
+<livewire:filament-image-studio-pro::gallery-viewer
+    :media="$mediaItems"
+    :columns="4"
+    :lightbox="true"
+/>
+```
+
+In selection mode, pass `:selectable="true"` and `:multiple="true"` to allow single or multi-select. Selected indexes are tracked in the `selected` public property and can be dispatched to a parent via Livewire events.
+
+### ImageCompare
+
+A Livewire component for before/after image comparison with a draggable divider.
+
+```blade
+<livewire:filament-image-studio-pro::image-compare
+    before="{{ $original }}"
+    after="{{ $edited }}"
+    before-label="Original"
+    after-label="Edited"
+    :initial-position="50"
+/>
+```
+
+The initial split position is a percentage from 0 to 100. Labels appear on each side of the divider.
+
+
 
 The library page is not just a file browser. It manages the full lifecycle around creative work.
 

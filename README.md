@@ -1,17 +1,13 @@
 # Filament Image Studio Pro
 
-Filament Image Studio Pro is a premium Filament plugin for teams that need to create branded, publish-ready images without leaving the admin panel.
+Filament Image Studio Pro is a premium Filament plugin that gives your team a complete image production workspace inside the admin panel — no Canva, no Photoshop, no download-edit-reupload cycle.
 
-It is built for real production work inside Filament: reusable source images, editable projects, templates, brand presets, exports, and direct handoff back into your app.
+It covers the full lifecycle: editing images on a canvas, managing a shared asset library, reviewing and approving work as a team, and handing the finished result back to any Filament form, record, or Media Library collection.
 
 ## Live demo
 
 - Landing page: https://filament-image-studio-pro.heinerdevelops.tech
 - Admin login: https://filament-image-studio-pro.heinerdevelops.tech/admin/login
-
-Use the landing page when you want the public product overview. Use the admin login when you want to go straight into the Filament dashboard demo.
-
-If you open a protected studio route while logged out, Filament redirects you to the admin login screen first.
 
 ## Purchase, docs, and support
 
@@ -23,80 +19,94 @@ If you open a protected studio route while logged out, Filament redirects you to
 
 Editor workspace:
 
-![Image Studio editor workspace](docs/screenshots/editor-page.png?v=20260319-0045)
+![Image Studio Pro canvas editor](docs/screenshots/editor-page.png)
 
 Library workspace:
 
-![Image Studio library workspace](docs/screenshots/library-page.png?v=20260319-0045)
+![Image Studio Pro library](docs/screenshots/library-page.png)
+
+Settings page:
+
+![Image Studio Pro settings](docs/screenshots/settings-page.png)
 
 ## What Image Studio Pro does
 
-Image Studio Pro adds a complete image workflow to Filament:
+Image Studio Pro adds a complete image production workflow to Filament:
 
-- create image drafts from uploads, presets, templates, or reusable sources
-- edit images on a canvas with text, shapes, markup tools, drawing, filters, clipboard, keyboard shortcuts, and layers
-- save reusable templates for repeatable output
-- create brand presets with colors, fonts, text defaults, and logos
-- manage reusable source images in a Source Library
-- export renders as PNG, JPEG, or WebP
-- send the finished result back into a Filament form, record attribute, storage path, or Media Library
+- edit and compose images on a canvas with text, shapes, filters, markup tools, drawing, and layers
+- manage reusable source images, templates, and brand presets in a shared library
+- export renders as PNG, JPEG, or WebP and hand the result to a form field, record attribute, or Media Library
+- view single images in a pan/zoom slide-over, browse a gallery with lightbox, or compare before/after images with a draggable divider — all from standard Filament actions and Livewire components
+- run a full team review and approval cycle with revision history so work stays auditable
 
 ## Feature summary
 
-### Editor
+### Canvas editor
 
-- start from a blank canvas, an uploaded image, a template, a saved project, or a preset size
-- crop and reposition images directly on the canvas
-- add text layers, callouts, logos, and shape overlays
-- use markup tools (lines, arrows, highlights, notes, redaction) for review and feedback images
-- apply image adjustments such as brightness, contrast, saturation, blur, and grayscale
-- reorder layers, replace sources, and keep working from saved drafts
-- use undo / redo, snap guides, autosave, and draft previews while editing
+- start from a blank canvas, a source image, a template, a saved project, or a built-in format preset
+- crop and reposition images on the canvas
+- add text layers, shape overlays, callouts, and logos
+- use markup tools (lines, arrows, highlights, notes, redaction) for review images
+- apply 12 image adjustments: brightness, contrast, saturation, blur, grayscale, hue rotation, vibrance, noise, pixelate, sharpen, sepia, invert
+- reorder layers, replace sources, lock individual layers to protect finished elements
+- undo/redo, autosave, snap guides, and draft previews
 - draw freehand with pencil, circle, and spray brush types
-- right-click context menu with clipboard, lock, and z-order controls
-- 30+ keyboard shortcuts for common editing operations
-- zoom and pan the canvas with scroll wheel, pinch, buttons, and spacebar drag
-- lock individual layers to prevent accidental edits
-- apply 12 image filters including hue rotation, vibrance, noise, pixelate, sharpen, sepia, and invert
+- right-click context menu: clipboard, lock, z-order
+- 30+ keyboard shortcuts
+- scroll-wheel zoom, pinch zoom, zoom buttons, spacebar-drag panning
+- draggable zoom toolbar — pull it anywhere within the canvas card so it never covers your work
 
-### Library
+### Image viewer and gallery
 
-- browse saved projects, reusable source images, templates, renders, and brand presets from one place
+- **`ViewImageAction`** — a Filament action that opens any image URL in a pan/zoom slide-over with close button
+- **`OpenMediaAction`** — opens a gallery modal for browsing, comparing, or selecting one or more images; supports selection callbacks and optional multiple-select mode
+- **`PanZoomViewer`** — standalone Livewire component for pan/zoom display with configurable min/max zoom and zoom controls
+- **`GalleryViewer`** — paginated Livewire gallery with lightbox, keyboard navigation, captions, and optional selectable/multi-select mode
+- **`ImageCompare`** — side-by-side image comparison with a draggable divider, before/after labels, and configurable initial split position
+
+### Asset library
+
+- browse saved projects, source images, templates, renders, and brand presets from one page
 - search and paginate large libraries
-- track project state with draft, published, and archived statuses
-- keep reusable source images separate from working design drafts
+- track project state: Draft, Published, Archived
+- reusable source images are kept separate from working design drafts
 
 ### Templates and brand presets
 
-- save reusable templates from the editor
-- reopen templates from the editor or the library page
-- create brand presets with colors, fonts, alignment defaults, logo assets, and text styling
-- apply brand presets to new layers or restyle existing text quickly
+- save layouts from the editor and apply them to new projects instantly
+- brand presets store colors, fonts, alignment defaults, logo assets, and text styling
+- apply brand presets to new layers or restyle existing text in one click
+
+### Team workflow
+
+- **Approval cycle**: Draft → In Review → Changes Requested → Approved
+- revision history: append-only manual and automatic checkpoints; restoring any revision creates a new entry instead of overwriting history
+- re-editing an approved asset resets it to Draft automatically
+- review authorization is gated by a configurable Gate ability
 
 ### Filament integration
 
-- standalone `Image Studio` page for editing
-- standalone `Image Studio Assets` page for managing projects and reusable assets
-- Filament form field integration for opening the studio from forms
-- Filament action integration for editing existing records in the studio
-- output targets for asset references, plain storage paths, and Spatie Media Library
+- standalone `Image Studio` editor page and `Image Studio Assets` library page
+- `CreativeStudioEditor` form field for embedding the studio in any Filament form
+- `EditInImageStudioAction` for launching the editor from table rows and record pages
+- `ViewImageAction` and `OpenMediaAction` for lightweight image viewing and selection
+- output targets: asset references, plain storage paths, Spatie Media Library
 
-### Storage and source support
+### Storage and sources
 
-- Laravel filesystem support for local disks, S3, GCS, R2, MinIO, and compatible storage
+- Laravel filesystem support: local, S3, GCS, R2, MinIO, and compatible drivers
 - curated filesystem browsing for smaller libraries
-- indexed source browsing for larger cloud-backed libraries
-- optional Spatie Media Library source browsing and output support
-- signed preview URLs and same-origin preview proxy support for private cloud storage
+- indexed source browsing for large cloud-backed libraries (fast search and pagination without bucket scanning)
+- Spatie Media Library source browsing and output support
+- signed preview URLs and same-origin preview proxy for private cloud storage
 
 ### Multitenancy and access control
 
 - automatic tenant scoping when Filament tenancy is active
-- configurable access hooks for page access, asset access, and source access
+- user mode (default) and panel mode (shared workspace without tenancy)
+- config-driven Gate abilities for page, asset, source, and review access
 
-## Built-in presets
-
-The package ships with ready-to-use canvas presets for common marketing formats:
+## Built-in format presets
 
 - Instagram Square
 - Instagram Story
@@ -105,26 +115,18 @@ The package ships with ready-to-use canvas presets for common marketing formats:
 - Promo Banner
 - YouTube Thumbnail
 
-## Documentation
+## Requirements
 
-- [Getting started](https://github.com/heinergiehl/filament-image-studio-pro-docs/blob/main/docs/getting-started.md)
-- [Feature tour](https://github.com/heinergiehl/filament-image-studio-pro-docs/blob/main/docs/feature-tour.md)
-- [Integrations and storage](https://github.com/heinergiehl/filament-image-studio-pro-docs/blob/main/docs/integrations-and-storage.md)
-
-## Current requirements
-
-The current release targets the following runtime stack:
-
-- PHP 8.3+
+- PHP 8.2+
 - Laravel 12.x
 - Filament 5.x
 - Livewire 4
 
 ## Installation
 
-1. Purchase Image Studio Pro from the public product page.
-2. Use the Composer repository or authentication details from your purchase instructions.
-3. Install the package:
+1. Purchase Image Studio Pro from the product page.
+2. Apply the Composer repository or authentication details from your purchase.
+3. Install:
 
 ```bash
 composer require heiner/filament-image-studio-pro
@@ -137,53 +139,29 @@ Register the plugin in your Filament panel:
 
 ```php
 use Filament\Panel;
-use Heiner\FilamentImageStudioPro\ImageStudioPlugin;
+use Heiner\FilamentCreativeStudioPro\CreativeStudioPlugin;
 
 public function panel(Panel $panel): Panel
 {
     return $panel
         ->plugins([
-            ImageStudioPlugin::make(),
+            CreativeStudioPlugin::make(),
         ]);
 }
 ```
 
 ## CSS hooks
 
-The public styling hooks are rooted at:
-
 - `.fi-creative-studio`
 - `.fi-creative-studio-field`
 
-That keeps host-app overrides aligned with Filament's `fi-` hook convention instead of relying on internal markup.
+## Documentation
 
-## Quick first workflow
-
-1. Install the plugin and register it in your Filament panel.
-2. Open `Image Studio Assets` to upload reusable sources, create brand presets, and review templates.
-3. Open `Image Studio` to start a blank design, open a saved project, load a template, or begin from a source image.
-4. Save the draft, export one or more render variants, or send the result back into your app.
-
-## When to use it
-
-Image Studio Pro is a strong fit when your team regularly creates:
-
-- social media graphics
-- blog hero images
-- Open Graph cards
-- promo banners
-- YouTube thumbnails
-- internal review and markup images
-- reusable branded image templates for editors or admin staff
-
-## Need deeper setup details?
-
-Start with [Getting started](https://github.com/heinergiehl/filament-image-studio-pro-docs/blob/main/docs/getting-started.md), then move to [Integrations and storage](https://github.com/heinergiehl/filament-image-studio-pro-docs/blob/main/docs/integrations-and-storage.md) if you need custom source providers, cloud storage, or app output configuration.
+- [Getting started](https://github.com/heinergiehl/filament-image-studio-pro-docs/blob/main/docs/getting-started.md)
+- [Feature tour](https://github.com/heinergiehl/filament-image-studio-pro-docs/blob/main/docs/feature-tour.md)
+- [Integrations and storage](https://github.com/heinergiehl/filament-image-studio-pro-docs/blob/main/docs/integrations-and-storage.md)
 
 ## Feedback welcome
 
-If you have a cool idea for a feature or an improvement, I'd genuinely love to hear it. Suggestions for workflows, integrations, UI polish, and quality-of-life improvements are always welcome.
+Suggestions, bug reports, and feature ideas are always welcome at webdevislife2021@gmail.com.
 
-If you run into a bug, have a question, or just want to share an idea, feel free to email me at webdevislife2021@gmail.com.
-
-I'm continuously improving Image Studio Pro and regularly publishing new versions to make it better over time.
